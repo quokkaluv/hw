@@ -62,13 +62,22 @@
     }
 
     // run the webcam image through the image model
-    async function predict() {
-        // predict can take in an image, video or canvas html element
-        const prediction = await model.predict(webcam.canvas);
-        for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+        // run the webcam image through the image model
+        async function predict() {
+            // predict can take in an image, video or canvas html element
+            var image = document.getElementById("my-image")
+            const prediction = await model.predict(image, false);
+            if(prediction[0].probability > 0.7){
+                labelContainer.childNodes[0].innerHTML = "위 과일은 사과입니다."
+                labelContainer.childNodes[1].innerHTML = "사과는 사과나무의 열매로, 세계적으로 널리 재배되는 열매 가운데 하나이다. 평과, 빈파라고도 한다. 사과열매는 가을에 익는데, 보통 지름이 5~9센티미터이다. 극히 드물지만 15센티에 이르기도 한다. 씨앗에는 미량의 사이안화물이 함유되어 있다."
+            }
+            else if(prediction[1].probability > 0.7){
+                labelContainer.childNodes[0].innerHTML = "위 포켓몬은 오렌지입니다."
+                labelContainer.childNodes[1].innerHTML = "오렌지는 비타민 C가 매우 풍부한 과일의 하나로, 일반적으로 당귤나무의 열매인 당귤을 부르는 말이다. 대표적인 귤열매로, 기름기를 함유한 가죽질 껍질과 즙이 많은 과육으로 이루어져 있다."
+        
+            else{
+                labelContainer.childNodes[0].innerHTML = "모르겠습니다."
+            }
         }
     }
 </script>
