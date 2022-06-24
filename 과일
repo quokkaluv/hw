@@ -12,6 +12,8 @@
 <body>
     <h1>이건 사과? 아님 오렌지?</h1>
     <p>삥뺭뽕뺭삥뺭뽕삥</p>
+        <button type="button" onclick="init()">Start</button>
+    <button type="button" onclick="predict()">Predict</button>
 
     <div>Teachable Machine Image Model</div>
 <button type="button" onclick="init()">Start</button>
